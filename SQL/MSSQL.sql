@@ -1,20 +1,20 @@
 use MindBoxTask
 
---создаём таблицу продуктов
+-- creating a Products table
 CREATE TABLE Products 
 (
 	Id INT PRIMARY KEY IDENTITY(1,1),
 	Title NVARCHAR(30)
 )
 
---создаём таблицу категорий
+-- creating a Categories table
 CREATE TABLE Categories
 (
 	Id INT PRIMARY KEY IDENTITY(1,1),
 	Title NVARCHAR(30)
 )
 
---создаём таблицу для связи многие ко многим
+-- creating a ProductCategories table to implement the many-to-many connection
 CREATE TABLE ProductCategories
 (
 	Id INT PRIMARY KEY IDENTITY(1,1),
@@ -22,12 +22,12 @@ CREATE TABLE ProductCategories
 	CategoryId INT REFERENCES Categories(Id),
 )
 
---заполняем таблицы
-INSERT INTO Products (Title) VALUES ('Яблоко'), ('Груша'), ('Помидор'), ('Картошка'), ('Черешня'), ('Лук'), ('Малина'), ('Ручка'), ('Карандаш'), ('Арбуз')
-INSERT INTO Categories (Title) VALUES ('Овощь'), ('Фрукт'), ('Ягода')
+-- filling tables with values
+INSERT INTO Products (Title) VALUES ('Product1'), ('Product2'), ('Product3'), ('Product4'), ('Г—Product5'), ('Product6'), ('Product7'), ('Product8'), ('Product9'), ('Product10')
+INSERT INTO Categories (Title) VALUES ('Category1'), ('Category2'), ('Category3')
 INSERT INTO ProductCategories (ProductId, CategoryId) VALUES (1, 2), (2, 2), (3, 1), (4, 1), (5, 3), (6, 1), (7, 3), (8, NULL), (9, NULL), (10, 2), (10, 3)
 
---запрос к БД для вывода всех пар "Имя продукта -  Имя категории"
+-- selection of all pairs product name - category name
 SELECT product.[Title],
     [Categories].[Title]
 FROM [Products] AS product
